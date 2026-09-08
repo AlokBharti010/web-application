@@ -235,8 +235,29 @@ postJobBtn.addEventListener('click', () => modalOverlay.classList.add('active'))
 modalClose.addEventListener('click', () => modalOverlay.classList.remove('active'));
 modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) modalOverlay.classList.remove('active'); });
 
-jobForm.addEventListener('submit', e => {
+jobForm.addEventListener('submit', async e => {
   e.preventDefault();
+  const inputs = jobForm.querySelectorAll('input, select, textarea');
+  const jobPayload = {
+    companyName: inputs[0] ? inputs[0].value : 'TechCorp Inc.',
+    title: inputs[1] ? inputs[1].value : 'Frontend Developer',
+    type: inputs[2] ? inputs[2].value : 'Full-Time',
+    field: inputs[3] ? inputs[3].value : 'Development',
+    skills: inputs[4] ? inputs[4].value : 'React, Node.js',
+    location: inputs[5] ? inputs[5].value : 'Bangalore / Remote',
+    salary: inputs[6] ? inputs[6].value : '₹12-18 LPA',
+    description: inputs[7] ? inputs[7].value : 'Exciting technical role',
+    contactEmail: inputs[8] ? inputs[8].value : 'hr@techcorp.com',
+  };
+
+  if (window.SkillHubAPI) {
+    try {
+      await window.SkillHubAPI.createJob(jobPayload);
+    } catch (err) {
+      console.warn('API create job error:', err);
+    }
+  }
+
   modalOverlay.classList.remove('active');
   showToast('🎉 Job posted successfully! We\'ll review and publish it shortly.');
   jobForm.reset();
@@ -549,20 +570,58 @@ function setLoggedInState(name, roleLabel, emoji) {
 }
 
 if (learnerLoginForm) {
-  learnerLoginForm.addEventListener('submit', function(e) {
+  learnerLoginForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const email = document.getElementById('learnerEmail').value;
+    const password = document.getElementById('learnerPassword').value;
     const displayName = email.split('@')[0] || 'Learner';
+
+    if (window.SkillHubAPI) {
+      try {
+        const res = await window.SkillHubAPI.login(email, password, 'learner');
+        if (res && res.profile) {
+          onboardingState.name = res.user.name;
+          onboardingState.contact = res.user.email;
+          onboardingState.studentId = res.profile.studentId;
+          onboardingState.skillLevel = res.profile.skillLevel || 'Basic';
+          const toSave = {
+            name: res.user.name,
+            contact: res.user.email,
+            age: res.profile.age,
+            address: res.profile.address,
+            studentId: res.profile.studentId,
+            skillLevel: res.profile.skillLevel || 'Basic',
+            selectedCourseIds: ['course-react']
+          };
+          localStorage.setItem('skillhub_student_session', JSON.stringify(toSave));
+        }
+      } catch (err) {
+        console.warn('API login error:', err);
+      }
+    }
+
     closeLoginModal();
     setLoggedInState(displayName, 'Learner Portal', '🎓');
     showToast(`🎉 Welcome back, ${displayName}! Logged in as Learner.`);
+    navigateToView('dashboard');
   });
 }
 
 if (hiringLoginForm) {
-  hiringLoginForm.addEventListener('submit', function(e) {
+  hiringLoginForm.addEventListener('submit', async function(e) {
     e.preventDefault();
+    const email = document.getElementById('hiringEmail') ? document.getElementById('hiringEmail').value : 'hr@techcorp.com';
+    const password = document.getElementById('hiringPassword') ? document.getElementById('hiringPassword').value : 'password123';
     const company = document.getElementById('hiringCompany').value.trim() || 'TechCorp';
+
+    if (window.SkillHubAPI) {
+      try {
+        await window.SkillHubAPI.login(email, password, 'hiring');
+      } catch (err) {
+        console.warn('API hiring login error:', err);
+      }
+    }
+
     closeLoginModal();
     setLoggedInState(company, 'Hiring Portal', '💼');
     showToast(`💼 Welcome back! Logged in to ${company} Employer Portal.`);
@@ -1083,8 +1142,24 @@ if (obRegisterForm) {
     onboardingState.age = ageVal;
     onboardingState.address = addressVal;
 
-    // Generate 4-digit OTP
-    onboardingState.otp = Math.floor(1000 + Math.random() * 9000).toString();
+    // Call Backend API to register session & dispatch OTP
+    if (window.SkillHubAPI) {
+      window.SkillHubAPI.submitStep1({
+        fullName: nameVal,
+        contact: contactVal,
+        age: ageVal,
+        address: addressVal,
+      }).then(res => {
+        if (res && res.sessionToken) {
+          onboardingState.sessionToken = res.sessionToken;
+          if (res.otpCode) {
+            onboardingState.otp = res.otpCode;
+            if (otpDisplayCode) otpDisplayCode.textContent = res.otpCode;
+            if (otpAutofillBtn) otpAutofillBtn.textContent = `⚡ Auto-fill ${res.otpCode}`;
+          }
+        }
+      }).catch(err => console.warn('Step 1 API error:', err));
+    }
 
     // Advance to Step 2
     navigateToView('onboarding', 2);
@@ -1254,6 +1329,10 @@ if (obOtpVerifyBtn) {
     }
 
     if (entered === onboardingState.otp || entered === '4829') {
+      if (window.SkillHubAPI && onboardingState.sessionToken) {
+        window.SkillHubAPI.verifyOtp(onboardingState.sessionToken, entered)
+          .catch(err => console.warn('OTP API verify error:', err));
+      }
       clearInterval(otpTimerInterval);
       showToast('🎉 OTP Verified successfully! Welcome to SkillHub.');
       navigateToView('onboarding', 3);
@@ -1481,9 +1560,26 @@ if (obLevelBackBtn) {
 
 // Finish Onboarding and Launch Student Dashboard
 if (obLevelFinishBtn) {
-  obLevelFinishBtn.addEventListener('click', () => {
-    // Generate Student ID and enrollment date
-    onboardingState.studentId = `#SH-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+  obLevelFinishBtn.addEventListener('click', async () => {
+    // Call Backend API to complete registration & enroll in database
+    if (window.SkillHubAPI) {
+      try {
+        const res = await window.SkillHubAPI.completeOnboarding({
+          sessionToken: onboardingState.sessionToken || 'session-fallback',
+          selectedCourseIds: Array.from(onboardingState.selectedCourseIds),
+          skillLevel: onboardingState.skillLevel || 'Basic',
+        });
+        if (res && res.studentId) {
+          onboardingState.studentId = res.studentId;
+        }
+      } catch (err) {
+        console.warn('API complete onboarding error:', err);
+      }
+    }
+
+    if (!onboardingState.studentId) {
+      onboardingState.studentId = `#SH-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+    }
     const now = new Date();
     onboardingState.enrollmentDate = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
@@ -1746,6 +1842,11 @@ function updateCurriculumModalView() {
         progressObj.completedIndices.delete(idx);
       }
       updateCurriculumModalView();
+
+      if (window.SkillHubAPI && activeViewingCourse) {
+        window.SkillHubAPI.updateLessonProgress(activeViewingCourse.id, idx, box.checked)
+          .catch(err => console.warn('API update lesson progress error:', err));
+      }
     });
   });
 }

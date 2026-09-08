@@ -1,0 +1,14 @@
+{
+  "name": "skillhub-fullstack",
+  "version": "1.0.0",
+  "description": "SkillHub Full-Stack Learning & Career Marketplace Platform",
+  "scripts": {
+    "server": "npm run dev --prefix backend",
+    "server:seed": "npm run db:seed --prefix backend",
+    "client": "npx -y serve . -l 5173",
+    "dev": "npm run server"
+  },
+  "keywords": ["education", "careers", "edtech", "hackathon"],
+  "author": "SkillHub",
+  "license": "ISC"
+}
