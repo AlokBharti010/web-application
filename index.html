@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillHub – Learn. Grow. Get Hired.</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- LANDING PAGE VIEW -->
+  <div class="page-view landing-page-view active" id="landingView">
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">Skill<span class="accent">Hub</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#skills" class="nav-link">Learn</a></li>
+        <li><a href="#tutors" class="nav-link">Tutors</a></li>
+        <li><a href="#jobs" class="nav-link">Jobs</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions" id="navActions">
+        <div class="login-dropdown-wrapper" id="loginDropdownWrapper">
+          <button class="btn btn-ghost login-trigger" id="loginBtn" aria-haspopup="true" aria-expanded="false" title="Click to choose login option">
+            <span>Log In</span>
+            <span class="dropdown-chevron" id="dropdownChevron">▾</span>
+          </button>
+          <div class="login-dropdown-menu" id="loginDropdownMenu" role="menu" aria-label="Login Options">
+            <div class="dropdown-header">
+              <span class="dropdown-header-dot"></span>
+              <span>Select Login Portal</span>
+            </div>
+            <button class="dropdown-item" id="navLoginLearner" data-role="learner" role="menuitem">
+              <div class="dropdown-item-icon learner-icon">🎓</div>
+              <div class="dropdown-item-content">
+                <div class="dropdown-item-title">
+                  <span>Login as Learner</span>
+                  <span class="dropdown-badge learner-badge">Learner</span>
+                </div>
+                <div class="dropdown-item-sub">Access courses, mentorship &amp; certificates</div>
+              </div>
+              <span class="dropdown-item-arrow">→</span>
+            </button>
+            <button class="dropdown-item" id="navLoginHiring" data-role="hiring" role="menuitem">
+              <div class="dropdown-item-icon hiring-icon">💼</div>
+              <div class="dropdown-item-content">
+                <div class="dropdown-item-title">
+                  <span>Login for Hiring</span>
+                  <span class="dropdown-badge hiring-badge">Employer</span>
+                </div>
+                <div class="dropdown-item-sub">Post jobs, scout talent &amp; review applications</div>
+              </div>
+              <span class="dropdown-item-arrow">→</span>
+            </button>
+            <div class="dropdown-footer">
+              <span>New to SkillHub?</span>
+              <a href="#skills" id="dropdownGetStartedLink">Start Learning Free</a>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="navGetStartedBtn">Get Started</button>
+        <div class="user-profile-badge" id="userProfileBadge" style="display: none;">
+          <div class="avatar-pill" id="userAvatarPill" role="button" tabindex="0" title="Go to Dashboard">
+            <span class="avatar-emoji" id="userAvatarEmoji">🎓</span>
+            <div class="avatar-text">
+              <span class="user-display-name" id="userDisplayName">Alex Learner</span>
+              <span class="user-role-label" id="userRoleLabel">Learner Portal</span>
+            </div>
+          </div>
+          <button class="btn btn-outline btn-sm dashboard-nav-btn" id="navDashboardBtn" title="Open Student Dashboard">Dashboard</button>
+          <button class="btn btn-ghost btn-sm logout-btn" id="logoutBtn" title="Log Out">Log Out</button>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        🚀 Join 50,000+ learners already growing
+      </div>
+      <h1 class="hero-title">
+        <span class="typed-line">Master <span class="gradient-text" id="typedText"></span><span class="cursor-blink">|</span></span>
+        <br/>Skills &amp; Land Your
+        <br/><span class="gradient-text">Dream Job</span>
+      </h1>
+      <p class="hero-subtitle">
+        Connect with expert tutors, build real-world projects, and access thousands of job opportunities — all in one place.
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg pulse-btn">Start Learning Free</button>
+        <button class="btn btn-outline btn-lg">
+          <span class="play-icon">▶</span> Watch Demo
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" data-target="50">0</span><span>K+</span>
+          <p>Learners</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="200">0</span><span>+</span>
+          <p>Expert Tutors</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="1500">0</span><span>+</span>
+          <p>Job Listings</p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="floating-card card-1">
+        <div class="card-icon">🎯</div>
+        <div class="card-info"><strong>React.js</strong><span>Frontend Dev</span></div>
+        <div class="card-badge">Trending</div>
+      </div>
+      <div class="floating-card card-2">
+        <div class="card-icon">🤖</div>
+        <div class="card-info"><strong>AI/ML</strong><span>Data Science</span></div>
+        <div class="card-badge new-badge">New</div>
+      </div>
+      <div class="floating-card card-3">
+        <div class="card-icon">💼</div>
+        <div class="card-info"><strong>Google</strong><span>Hiring Now!</span></div>
+        <div class="card-badge hot-badge">Hot</div>
+      </div>
+      <div class="hero-circle">
+        <div class="circle-ring ring-1"></div>
+        <div class="circle-ring ring-2"></div>
+        <div class="circle-ring ring-3"></div>
+        <div class="hero-avatar"><div class="avatar-inner">👨‍💻</div></div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Scroll down</span>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust-section">
+    <p class="trust-label">Trusted by students who now work at</p>
+    <div class="trust-logos">
+      <div class="logo-track">
+        <span>Google</span><span>Microsoft</span><span>Amazon</span><span>Meta</span>
+        <span>Netflix</span><span>Apple</span><span>Stripe</span><span>Airbnb</span>
+        <span>Google</span><span>Microsoft</span><span>Amazon</span><span>Meta</span>
+        <span>Netflix</span><span>Apple</span><span>Stripe</span><span>Airbnb</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS / COURSES -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📚 Learn Anything</span>
+        <h2 class="section-title">Explore <span class="gradient-text">Top Skills</span></h2>
+        <p class="section-subtitle">Dive into industry-relevant courses taught by world-class experts</p>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="dev">Development</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+        <button class="filter-btn" data-filter="data">Data Science</button>
+        <button class="filter-btn" data-filter="marketing">Marketing</button>
+      </div>
+      <div class="courses-grid" id="coursesGrid">
+        <div class="course-card" data-category="dev">
+          <div class="course-thumb" style="background:linear-gradient(135deg,#667eea,#764ba2)"><span class="course-emoji">⚛️</span></div>
+          <div class="course-body">
+            <div class="course-tags"><span class="tag tag-dev">Development</span><span class="tag tag-hot">🔥 Trending</span></div>
+            <h3>React.js Complete Bootcamp</h3>
+            <p>Build modern UIs with hooks, context, and real projects.</p>
+            <div class="course-meta"><span>⭐ 4.9</span><span>•</span><span>32 hrs</span><span>•</span><span>12K students</span></div>
+            <div class="course-footer"><span class="price">Free</span><button class="btn btn-sm btn-primary">Enroll Now</button></div>
+          </div>
+        </div>
+        <div class="course-card" data-category="data">
+          <div class="course-thumb" style="background:linear-gradient(135deg,#f093fb,#f5576c)"><span class="course-emoji">🤖</span></div>
+          <div class="course-body">
+            <div class="course-tags"><span class="tag tag-data">Data Science</span><span class="tag tag-new">✨ New</span></div>
+            <h3>AI &amp; Machine Learning A-Z</h3>
+            <p>From Python basics to deploying ML models in production.</p>
+            <div class="course-meta"><span>⭐ 4.8</span><span>•</span><span>48 hrs</span><span>•</span><span>8K students</span></div>
+            <div class="course-footer"><span class="price">₹499</span><button class="btn btn-sm btn-primary">Enroll Now</button></div>
+          </div>
+        </div>
+        <div class="course-card" data-category="design">
+          <div class="course-thumb" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"><span class="course-emoji">🎨</span></div>
+          <div class="course-body">
+            <div class="course-tags"><span class="tag tag-design">Design</span></div>
+            <h3>UI/UX Design Masterclass</h3>
+            <p>Figma, design systems, and user research from scratch.</p>
+            <div class="course-meta"><span>⭐ 4.7</span><span>•</span><span>24 hrs</span><span>•</span><span>5K students</span></div>
+            <div class="course-footer"><span class="price">₹299</span><button class="btn btn-sm btn-primary">Enroll Now</button></div>
+          </div>
+        </div>
+        <div class="course-card" data-category="dev">
+          <div class="course-thumb" style="background:linear-gradient(135deg,#43e97b,#38f9d7)"><span class="course-emoji">🐍</span></div>
+          <div class="course-body">
+            <div class="course-tags"><span class="tag tag-dev">Development</span></div>
+            <h3>Python for Beginners</h3>
+            <p>Master Python with hands-on projects and challenges.</p>
+            <div class="course-meta"><span>⭐ 4.9</span><span>•</span><span>20 hrs</span><span>•</span><span>20K students</span></div>
+            <div class="course-footer"><span class="price">Free</span><button class="btn btn-sm btn-primary">Enroll Now</button></div>
+          </div>
+        </div>
+        <div class="course-card" data-category="marketing">
+          <div class="course-thumb" style="background:linear-gradient(135deg,#fa709a,#fee140)"><span class="course-emoji">📣</span></div>
+          <div class="course-body">
+            <div class="course-tags"><span class="tag tag-marketing">Marketing</span></div>
+            <h3>Digital Marketing Pro</h3>
+            <p>SEO, SEM, social media and content strategy all-in-one.</p>
+            <div class="course-meta"><span>⭐ 4.6</span><span>•</span><span>18 hrs</span><span>•</span><span>7K students</span></div>
+            <div class="course-footer"><span class="price">₹199</span><button class="btn btn-sm btn-primary">Enroll Now</button></div>
+          </div>
+        </div>
+        <div class="course-card" data-category="data">
+          <div class="course-thumb" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"><span class="course-emoji">📊</span></div>
+          <div class="course-body">
+            <div class="course-tags"><span class="tag tag-data">Data Science</span></div>
+            <h3>Data Analytics with Excel &amp; SQL</h3>
+            <p>Turn raw data into actionable business insights.</p>
+            <div class="course-meta"><span>⭐ 4.8</span><span>•</span><span>16 hrs</span><span>•</span><span>9K students</span></div>
+            <div class="course-footer"><span class="price">Free</span><button class="btn btn-sm btn-primary">Enroll Now</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="section-cta"><button class="btn btn-outline btn-lg">View All 200+ Courses</button></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🛤️ Your Journey</span>
+        <h2 class="section-title">How <span class="gradient-text">SkillHub</span> Works</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card"><div class="step-num">01</div><div class="step-icon">🔍</div><h3>Choose a Skill</h3><p>Browse our curated catalog and pick the skill that matches your career goal.</p></div>
+        <div class="step-arrow">→</div>
+        <div class="step-card"><div class="step-num">02</div><div class="step-icon">👨‍🏫</div><h3>Learn with Experts</h3><p>Get live sessions, recordings, and mentorship from industry professionals.</p></div>
+        <div class="step-arrow">→</div>
+        <div class="step-card"><div class="step-num">03</div><div class="step-icon">🏆</div><h3>Earn a Certificate</h3><p>Complete projects and assessments to earn a verified certificate.</p></div>
+        <div class="step-arrow">→</div>
+        <div class="step-card"><div class="step-num">04</div><div class="step-icon">💼</div><h3>Get Hired</h3><p>Apply to jobs posted by top companies actively recruiting SkillHub grads.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TUTORS -->
+  <section class="section" id="tutors">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">👩‍🏫 Meet the Experts</span>
+        <h2 class="section-title">Learn from the <span class="gradient-text">Best Tutors</span></h2>
+        <p class="section-subtitle">Real professionals from top companies sharing their knowledge</p>
+      </div>
+      <div class="tutors-grid">
+        <div class="tutor-card">
+          <div class="tutor-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">AM</div>
+          <div class="tutor-info"><h3>Arjun Mehta</h3><p class="tutor-role">Senior Engineer @ Google</p><p class="tutor-skills">React • Node.js • System Design</p><div class="tutor-stats"><span>⭐ 4.9</span><span>2.1K students</span><span>12 courses</span></div></div>
+          <button class="btn btn-sm btn-primary tutor-btn">Book Session</button>
+        </div>
+        <div class="tutor-card featured-tutor">
+          <div class="featured-ribbon">⭐ Top Rated</div>
+          <div class="tutor-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">PS</div>
+          <div class="tutor-info"><h3>Priya Sharma</h3><p class="tutor-role">ML Researcher @ OpenAI</p><p class="tutor-skills">Python • TensorFlow • NLP</p><div class="tutor-stats"><span>⭐ 5.0</span><span>3.5K students</span><span>8 courses</span></div></div>
+          <button class="btn btn-sm btn-primary tutor-btn">Book Session</button>
+        </div>
+        <div class="tutor-card">
+          <div class="tutor-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">RK</div>
+          <div class="tutor-info"><h3>Rahul Kumar</h3><p class="tutor-role">UX Lead @ Microsoft</p><p class="tutor-skills">Figma • UX Research • Prototyping</p><div class="tutor-stats"><span>⭐ 4.8</span><span>1.8K students</span><span>10 courses</span></div></div>
+          <button class="btn btn-sm btn-primary tutor-btn">Book Session</button>
+        </div>
+        <div class="tutor-card">
+          <div class="tutor-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">SA</div>
+          <div class="tutor-info"><h3>Sneha Agarwal</h3><p class="tutor-role">Data Scientist @ Amazon</p><p class="tutor-skills">SQL • Power BI • Statistics</p><div class="tutor-stats"><span>⭐ 4.9</span><span>2.8K students</span><span>15 courses</span></div></div>
+          <button class="btn btn-sm btn-primary tutor-btn">Book Session</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOBS -->
+  <section class="section jobs-section" id="jobs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">💼 Career Opportunities</span>
+        <h2 class="section-title">Job <span class="gradient-text">Board</span></h2>
+        <p class="section-subtitle">Companies are actively recruiting SkillHub graduates — your next job is here</p>
+      </div>
+      <div class="post-job-banner">
+        <div class="post-job-text"><h3>🏢 Are you a company?</h3><p>Post your job openings and reach thousands of skilled, job-ready graduates.</p></div>
+        <button class="btn btn-primary btn-lg" id="postJobBtn">Post a Job — Free</button>
+      </div>
+      <div class="job-filters">
+        <div class="search-box"><span class="search-icon">🔍</span><input type="text" placeholder="Search jobs, companies, skills..." id="jobSearch" /></div>
+        <select class="filter-select" id="jobType"><option value="all">All Types</option><option value="full-time">Full-Time</option><option value="internship">Internship</option><option value="remote">Remote</option><option value="part-time">Part-Time</option></select>
+        <select class="filter-select" id="jobField"><option value="all">All Fields</option><option value="development">Development</option><option value="design">Design</option><option value="data">Data Science</option><option value="marketing">Marketing</option></select>
+      </div>
+      <div class="jobs-grid" id="jobsGrid">
+        <div class="job-card" data-type="full-time" data-field="development">
+          <div class="job-header"><div class="company-logo" style="background:linear-gradient(135deg,#4285f4,#0f9d58)">G</div><div class="job-title-block"><h3>Frontend Developer</h3><p class="company-name">Google</p></div><div class="job-badges"><span class="badge badge-type">Full-Time</span><span class="badge badge-remote">Remote</span></div></div>
+          <div class="job-skills"><span class="skill-chip">React.js</span><span class="skill-chip">TypeScript</span><span class="skill-chip">GraphQL</span></div>
+          <div class="job-footer"><div class="job-meta"><span>📍 Bangalore</span><span>💰 ₹12-18 LPA</span></div><button class="btn btn-sm btn-primary">Apply Now</button></div>
+          <div class="job-posted">Posted 2 days ago</div>
+        </div>
+        <div class="job-card hot-job" data-type="internship" data-field="data">
+          <div class="hot-ribbon">🔥 Hot</div>
+          <div class="job-header"><div class="company-logo" style="background:linear-gradient(135deg,#ff6900,#ff3d00)">A</div><div class="job-title-block"><h3>Data Science Intern</h3><p class="company-name">Amazon</p></div><div class="job-badges"><span class="badge badge-type">Internship</span><span class="badge badge-paid">Paid</span></div></div>
+          <div class="job-skills"><span class="skill-chip">Python</span><span class="skill-chip">SQL</span><span class="skill-chip">Machine Learning</span></div>
+          <div class="job-footer"><div class="job-meta"><span>📍 Hyderabad</span><span>💰 ₹50K/month</span></div><button class="btn btn-sm btn-primary">Apply Now</button></div>
+          <div class="job-posted">Posted 1 day ago</div>
+        </div>
+        <div class="job-card" data-type="remote" data-field="design">
+          <div class="job-header"><div class="company-logo" style="background:linear-gradient(135deg,#0070f3,#7928ca)">V</div><div class="job-title-block"><h3>UI/UX Designer</h3><p class="company-name">Vercel</p></div><div class="job-badges"><span class="badge badge-remote">Remote</span></div></div>
+          <div class="job-skills"><span class="skill-chip">Figma</span><span class="skill-chip">Design Systems</span><span class="skill-chip">User Research</span></div>
+          <div class="job-footer"><div class="job-meta"><span>📍 Worldwide</span><span>💰 ₹8-14 LPA</span></div><button class="btn btn-sm btn-primary">Apply Now</button></div>
+          <div class="job-posted">Posted 3 days ago</div>
+        </div>
+        <div class="job-card" data-type="full-time" data-field="development">
+          <div class="job-header"><div class="company-logo" style="background:linear-gradient(135deg,#00d2ff,#3a47d5)">M</div><div class="job-title-block"><h3>Backend Engineer</h3><p class="company-name">Microsoft</p></div><div class="job-badges"><span class="badge badge-type">Full-Time</span></div></div>
+          <div class="job-skills"><span class="skill-chip">Node.js</span><span class="skill-chip">Azure</span><span class="skill-chip">Docker</span></div>
+          <div class="job-footer"><div class="job-meta"><span>📍 Noida</span><span>💰 ₹15-25 LPA</span></div><button class="btn btn-sm btn-primary">Apply Now</button></div>
+          <div class="job-posted">Posted 5 days ago</div>
+        </div>
+        <div class="job-card" data-type="internship" data-field="marketing">
+          <div class="job-header"><div class="company-logo" style="background:linear-gradient(135deg,#f7971e,#ffd200)">Z</div><div class="job-title-block"><h3>Growth Marketing Intern</h3><p class="company-name">Zomato</p></div><div class="job-badges"><span class="badge badge-type">Internship</span><span class="badge badge-paid">Paid</span></div></div>
+          <div class="job-skills"><span class="skill-chip">SEO</span><span class="skill-chip">Content Strategy</span><span class="skill-chip">Analytics</span></div>
+          <div class="job-footer"><div class="job-meta"><span>📍 Mumbai</span><span>💰 ₹25K/month</span></div><button class="btn btn-sm btn-primary">Apply Now</button></div>
+          <div class="job-posted">Posted 1 week ago</div>
+        </div>
+        <div class="job-card" data-type="remote" data-field="data">
+          <div class="job-header"><div class="company-logo" style="background:linear-gradient(135deg,#667eea,#764ba2)">S</div><div class="job-title-block"><h3>ML Engineer</h3><p class="company-name">Stripe</p></div><div class="job-badges"><span class="badge badge-remote">Remote</span><span class="badge badge-type">Full-Time</span></div></div>
+          <div class="job-skills"><span class="skill-chip">Python</span><span class="skill-chip">TensorFlow</span><span class="skill-chip">MLOps</span></div>
+          <div class="job-footer"><div class="job-meta"><span>📍 Remote</span><span>💰 ₹20-30 LPA</span></div><button class="btn btn-sm btn-primary">Apply Now</button></div>
+          <div class="job-posted">Posted 4 days ago</div>
+        </div>
+      </div>
+      <div class="section-cta"><button class="btn btn-outline btn-lg">Explore All 1500+ Jobs</button></div>
+    </div>
+  </section>
+
+  <!-- POST JOB MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="postJobModal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h2>📋 Post a Job</h2>
+      <p class="modal-sub">Reach thousands of skilled SkillHub graduates</p>
+      <form class="job-form" id="jobForm">
+        <div class="form-row">
+          <div class="form-group"><label>Company Name *</label><input type="text" placeholder="e.g. TechCorp Inc." required /></div>
+          <div class="form-group"><label>Job Title *</label><input type="text" placeholder="e.g. Frontend Developer" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Job Type *</label><select><option>Full-Time</option><option>Internship</option><option>Remote</option><option>Part-Time</option></select></div>
+          <div class="form-group"><label>Field *</label><select><option>Development</option><option>Design</option><option>Data Science</option><option>Marketing</option></select></div>
+        </div>
+        <div class="form-group"><label>Required Skills</label><input type="text" placeholder="e.g. React, Node.js, SQL" /></div>
+        <div class="form-row">
+          <div class="form-group"><label>Location</label><input type="text" placeholder="e.g. Bangalore / Remote" /></div>
+          <div class="form-group"><label>Salary Range</label><input type="text" placeholder="e.g. 8-12 LPA" /></div>
+        </div>
+        <div class="form-group"><label>Job Description *</label><textarea rows="4" placeholder="Describe the role, responsibilities..."></textarea></div>
+        <div class="form-group"><label>Contact Email *</label><input type="email" placeholder="hr@yourcompany.com" required /></div>
+        <button type="submit" class="btn btn-primary btn-lg w-full">🚀 Post Job Now</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">💬 Success Stories</span>
+        <h2 class="section-title">What Our <span class="gradient-text">Graduates Say</span></h2>
+      </div>
+      <div class="testimonials-wrapper">
+        <div class="testimonials-track" id="testimonialsTrack">
+          <div class="testimonial-card"><div class="quote-icon">"</div><p>SkillHub completely transformed my career. I went from a beginner to landing a ₹14 LPA job at a startup in just 6 months!</p><div class="reviewer"><div class="reviewer-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">AK</div><div><strong>Aditya Kapoor</strong><span>Frontend Dev @ Razorpay</span></div></div><div class="stars">⭐⭐⭐⭐⭐</div></div>
+          <div class="testimonial-card"><div class="quote-icon">"</div><p>The tutors are incredible — real industry experts who care. The job board helped me get hired at Amazon within 2 weeks of my certificate!</p><div class="reviewer"><div class="reviewer-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">RM</div><div><strong>Riya Malhotra</strong><span>Data Scientist @ Amazon</span></div></div><div class="stars">⭐⭐⭐⭐⭐</div></div>
+          <div class="testimonial-card"><div class="quote-icon">"</div><p>Best investment I made. The hands-on projects were exactly what recruiters wanted. Got 3 interview calls in a single week!</p><div class="reviewer"><div class="reviewer-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">VJ</div><div><strong>Vikram Joshi</strong><span>UX Designer @ Flipkart</span></div></div><div class="stars">⭐⭐⭐⭐⭐</div></div>
+        </div>
+      </div>
+      <div class="testimonial-dots" id="testimonialDots">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section" id="contact">
+    <div class="container">
+      <div class="newsletter-card">
+        <div class="newsletter-glow"></div>
+        <h2>🎯 Stay Ahead of the Curve</h2>
+        <p>Get weekly job alerts, free course drops, and career tips straight to your inbox.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Enter your email address" id="newsletterEmail" />
+          <button class="btn btn-primary" id="subscribeBtn">Subscribe Free</button>
+        </div>
+        <p class="newsletter-note">No spam. Unsubscribe anytime. Join 15K+ readers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">Skill<span class="accent">Hub</span></span></a>
+          <p>The all-in-one platform for learning skills and landing your dream job.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">𝕏</a><a href="#" class="social-link">in</a><a href="#" class="social-link">yt</a><a href="#" class="social-link">ig</a>
+          </div>
+        </div>
+        <div class="footer-col"><h4>Learn</h4><ul><li><a href="#">All Courses</a></li><li><a href="#">Live Classes</a></li><li><a href="#">Certifications</a></li><li><a href="#">Free Resources</a></li></ul></div>
+        <div class="footer-col"><h4>Jobs</h4><ul><li><a href="#">Browse Jobs</a></li><li><a href="#">Post a Job</a></li><li><a href="#">For Companies</a></li><li><a href="#">Internships</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 SkillHub. All rights reserved.</p>
+        <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+      </div>
+    </div>
+  </footer>
+  </div> <!-- /landingView -->
+
+  <!-- ONBOARDING FLOW VIEW -->
+  <div class="page-view onboarding-page-view" id="onboardingView" style="display: none;">
+    <!-- Top Bar -->
+    <header class="ob-top-bar">
+      <div class="ob-top-container">
+        <a href="#" class="logo ob-logo" id="obLogoBack">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">Skill<span class="accent">Hub</span></span>
+        </a>
+
+        <!-- Stepper -->
+        <div class="ob-stepper" id="obStepper">
+          <div class="step-item active" data-step="1" id="stepIndicator1">
+            <div class="step-circle">1</div>
+            <div class="step-meta">
+              <span class="step-number">Step 1</span>
+              <span class="step-title">Profile Info</span>
+            </div>
+          </div>
+          <div class="step-line" id="stepLine1"></div>
+          <div class="step-item" data-step="2" id="stepIndicator2">
+            <div class="step-circle">2</div>
+            <div class="step-meta">
+              <span class="step-number">Step 2</span>
+              <span class="step-title">OTP Verify</span>
+            </div>
+          </div>
+          <div class="step-line" id="stepLine2"></div>
+          <div class="step-item" data-step="3" id="stepIndicator3">
+            <div class="step-circle">3</div>
+            <div class="step-meta">
+              <span class="step-number">Step 3</span>
+              <span class="step-title">Courses</span>
+            </div>
+          </div>
+          <div class="step-line" id="stepLine3"></div>
+          <div class="step-item" data-step="4" id="stepIndicator4">
+            <div class="step-circle">4</div>
+            <div class="step-meta">
+              <span class="step-number">Step 4</span>
+              <span class="step-title">Skill Level</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-ghost btn-sm ob-exit-btn" id="obExitBtn">✕ Return to Home</button>
+      </div>
+    </header>
+
+    <div class="ob-main-container">
+
+      <!-- STEP 1: Registration / Login Page -->
+      <div class="ob-step-panel active" id="obStep1Panel">
+        <div class="ob-card">
+          <div class="ob-header text-center">
+            <div class="ob-badge-pill">🚀 Step 1 of 4: Learner Profile</div>
+            <h2>Start Your <span class="gradient-text">Learning Journey</span></h2>
+            <p class="ob-sub">Enter your details to create your student account and access courses</p>
+          </div>
+
+          <div class="demo-fill-banner ob-demo-banner">
+            <span class="demo-icon">💡</span>
+            <span class="demo-text">Testing or evaluating?</span>
+            <button type="button" class="demo-fill-btn" id="obAutofillBtn">⚡ Autofill Demo Student</button>
+          </div>
+
+          <form id="obRegisterForm" class="ob-form" novalidate>
+            <!-- 1. Name -->
+            <div class="form-group">
+              <label for="obName">1. Full Name <span class="req">*</span></label>
+              <div class="input-with-icon">
+                <span class="input-icon">👤</span>
+                <input type="text" id="obName" placeholder="e.g. Aarav Sharma" required autocomplete="name" />
+              </div>
+              <span class="field-error" id="errObName">Please enter your full name</span>
+            </div>
+
+            <!-- 2. Email or phone no. -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="obContact">2. Email or Phone Number <span class="req">*</span></label>
+                <div class="contact-mode-pills">
+                  <span class="contact-pill active" id="contactPillEmail">Email / Mobile</span>
+                </div>
+              </div>
+              <div class="input-with-icon">
+                <span class="input-icon" id="obContactIcon">✉️</span>
+                <input type="text" id="obContact" placeholder="e.g. aarav.sharma@example.com or +91 98765 43210" required />
+              </div>
+              <span class="field-hint">We will dispatch your 4-digit verification OTP to this address or mobile.</span>
+              <span class="field-error" id="errObContact">Please enter a valid email address or phone number</span>
+            </div>
+
+            <!-- 3. Age -->
+            <div class="form-group">
+              <label for="obAge">3. Age <span class="req">*</span></label>
+              <div class="input-with-icon">
+                <span class="input-icon">🎂</span>
+                <input type="number" id="obAge" min="10" max="100" placeholder="e.g. 21" required />
+              </div>
+              <span class="field-error" id="errObAge">Please enter a valid age between 10 and 100</span>
+            </div>
+
+            <!-- 4. Address -->
+            <div class="form-group">
+              <label for="obAddress">4. Address <span class="req">*</span></label>
+              <div class="input-with-icon input-textarea-wrap">
+                <span class="input-icon textarea-icon">📍</span>
+                <textarea id="obAddress" rows="2" placeholder="e.g. 42 Tech Innovation Park, Bengaluru, Karnataka, 560100" required></textarea>
+              </div>
+              <span class="field-error" id="errObAddress">Please provide your address</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-full ob-submit-btn" id="obSubmitStep1">
+              <span>Continue to OTP Verification</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- STEP 2: 4-Digit OTP Verification Page -->
+      <div class="ob-step-panel" id="obStep2Panel" style="display: none;">
+        <div class="ob-card">
+          <div class="ob-header text-center">
+            <div class="ob-badge-pill">🔐 Step 2 of 4: Security Confirmation</div>
+            <h2>Enter 4-Digit <span class="gradient-text">Verification OTP</span></h2>
+            <p class="ob-sub">We've dispatched a 4-digit one-time code to your registered contact:</p>
+          </div>
+
+          <!-- Target Contact Box -->
+          <div class="otp-target-card">
+            <div class="otp-target-info">
+              <span class="target-icon">📲</span>
+              <span class="target-contact" id="obOtpTargetDisplay">learner@skillhub.com</span>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm ob-change-contact-btn" id="obEditContactBtn">Edit</button>
+          </div>
+
+          <!-- Simulated SMS/Email Notification Banner -->
+          <div class="otp-notification-sim" id="otpNotificationSim">
+            <div class="sim-header">
+              <span class="sim-dot"></span>
+              <span class="sim-sender">📱 SkillHub Dispatch System</span>
+              <span class="sim-time">Just now</span>
+            </div>
+            <div class="sim-body">
+              <div class="sim-text">
+                Your 4-digit SkillHub verification code is: <strong class="sim-code" id="otpDisplayCode">4829</strong>
+              </div>
+              <button type="button" class="btn btn-sm btn-primary sim-autofill-btn" id="otpAutofillBtn">⚡ Auto-fill 4829</button>
+            </div>
+          </div>
+
+          <!-- 4-Digit Inputs -->
+          <div class="otp-inputs-wrapper">
+            <label class="otp-label">Enter the 4-digit code</label>
+            <div class="otp-boxes" id="otpBoxes">
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box" id="otpBox1" data-idx="0" autofocus />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box" id="otpBox2" data-idx="1" />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box" id="otpBox3" data-idx="2" />
+              <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="otp-box" id="otpBox4" data-idx="3" />
+            </div>
+            <div class="otp-error" id="otpErrorMsg" style="display: none;"></div>
+          </div>
+
+          <!-- Timer & Resend -->
+          <div class="otp-timer-box">
+            <span>Didn't receive the code?</span>
+            <span class="timer-badge" id="otpTimerContainer">Resend code in <strong id="otpTimerText">00:30</strong></span>
+            <button type="button" class="resend-trigger-btn" id="otpResendBtn" style="display: none;">Resend OTP Now</button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="ob-action-dual">
+            <button type="button" class="btn btn-outline" id="obOtpBackBtn">← Back</button>
+            <button type="button" class="btn btn-primary btn-lg" id="obOtpVerifyBtn">
+              <span>Confirm OTP &amp; View Courses</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Courses Offered Page -->
+      <div class="ob-step-panel ob-courses-panel" id="obStep3Panel" style="display: none;">
+        <div class="ob-wide-header text-center">
+          <div class="ob-badge-pill">📚 Step 3 of 4: Curriculum Selection</div>
+          <h2>Explore All <span class="gradient-text">Courses Offered</span></h2>
+          <p class="ob-sub">Select one or multiple courses you want to enroll in. You can customize your learning path.</p>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="ob-courses-toolbar">
+          <div class="ob-filter-pills" id="obCourseCategoryFilter">
+            <button type="button" class="ob-filter-btn active" data-category="all">All Courses (8)</button>
+            <button type="button" class="ob-filter-btn" data-category="dev">Development</button>
+            <button type="button" class="ob-filter-btn" data-category="ai">AI &amp; Data Science</button>
+            <button type="button" class="ob-filter-btn" data-category="design">Design</button>
+            <button type="button" class="ob-filter-btn" data-category="cloud">Cloud &amp; DevOps</button>
+            <button type="button" class="ob-filter-btn" data-category="security">Cybersecurity</button>
+          </div>
+          <div class="ob-search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="obCourseSearch" placeholder="Search courses, technologies, skills..." />
+            <button type="button" class="search-clear-btn" id="obSearchClear" style="display: none;">✕</button>
+          </div>
+        </div>
+
+        <!-- Courses Grid -->
+        <div class="ob-courses-grid" id="obCoursesGrid">
+          <!-- Dynamic courses injected by JavaScript -->
+        </div>
+
+        <!-- Sticky Bottom Bar -->
+        <div class="ob-courses-sticky-bar" id="obCoursesStickyBar">
+          <div class="sticky-bar-left">
+            <div class="selection-counter-badge">
+              <span class="counter-number" id="obSelectedCount">0</span>
+              <span>Courses Selected</span>
+            </div>
+            <div class="selected-courses-preview" id="obSelectedNames">
+              <span class="empty-hint">Please select at least one course to continue</span>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-lg" id="obCoursesProceedBtn" disabled>
+            <span>Continue to Skill Assessment</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Level Assessment Page ("How much do you known") -->
+      <div class="ob-step-panel ob-level-panel" id="obStep4Panel" style="display: none;">
+        <div class="ob-card ob-level-card-wrap">
+          <div class="ob-header text-center">
+            <div class="ob-badge-pill">🎯 Step 4 of 4: Experience Assessment</div>
+            <h2 class="level-main-title"><span class="gradient-text">How much do you known</span></h2>
+            <p class="ob-sub">Select your current proficiency level so we can tailor your learning roadmap, project difficulty, and mentor matching.</p>
+          </div>
+
+          <!-- 4 Level Cards -->
+          <div class="levels-grid" id="levelsGrid">
+            <!-- 1. Basic -->
+            <div class="level-card" data-level="Basic" tabindex="0" role="radio" aria-checked="false">
+              <div class="level-radio-indicator"></div>
+              <div class="level-icon-box basic-icon">🌱</div>
+              <div class="level-content">
+                <div class="level-title-row">
+                  <h3 class="level-name">Basic</h3>
+                  <span class="level-tag basic-tag">Beginner</span>
+                </div>
+                <p class="level-desc">Starting from absolute scratch with little to no prior coding experience. Want clear step-by-step guidance, fundamental syntax, and foundational exercises.</p>
+                <div class="level-perks">
+                  <span>✓ Core fundamentals starter pack</span>
+                  <span>✓ Step-by-step video walkthroughs</span>
+                  <span>✓ Weekly live beginner Q&amp;A</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Intermediate -->
+            <div class="level-card" data-level="Intermediate" tabindex="0" role="radio" aria-checked="false">
+              <div class="level-radio-indicator"></div>
+              <div class="level-icon-box intermediate-icon">⚡</div>
+              <div class="level-content">
+                <div class="level-title-row">
+                  <h3 class="level-name">Intermediate</h3>
+                  <span class="level-tag intermediate-tag">Moderate</span>
+                </div>
+                <p class="level-desc">Already familiar with coding basics, syntax, and simple apps. Ready to build full-stack web applications, master modern frameworks, and work with APIs &amp; databases.</p>
+                <div class="level-perks">
+                  <span>✓ Full-stack architecture &amp; REST APIs</span>
+                  <span>✓ State management &amp; component patterns</span>
+                  <span>✓ Real-world problem solving</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Advanced -->
+            <div class="level-card" data-level="Advanced" tabindex="0" role="radio" aria-checked="false">
+              <div class="level-radio-indicator"></div>
+              <div class="level-icon-box advanced-icon">🚀</div>
+              <div class="level-content">
+                <div class="level-title-row">
+                  <h3 class="level-name">Advanced</h3>
+                  <span class="level-tag advanced-tag">Expert</span>
+                </div>
+                <p class="level-desc">Experienced software developer or computer science graduate. Seeking deep-dives into distributed systems, high concurrency, cloud scalability, and architectural design patterns.</p>
+                <div class="level-perks">
+                  <span>✓ System design &amp; microservices</span>
+                  <span>✓ High-throughput performance tuning</span>
+                  <span>✓ Production CI/CD &amp; cloud scaling</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Wants to work on project -->
+            <div class="level-card" data-level="Wants to work on project" tabindex="0" role="radio" aria-checked="false">
+              <div class="level-radio-indicator"></div>
+              <div class="level-icon-box project-icon">🛠️</div>
+              <div class="level-content">
+                <div class="level-title-row">
+                  <h3 class="level-name">Wants to work on project</h3>
+                  <span class="level-tag project-tag">Hands-On Builder</span>
+                </div>
+                <p class="level-desc">Hands-on, portfolio-driven learner! Priority is building production-grade capstone apps, pushing code to GitHub, collaborating on real-world client briefs, and landing jobs.</p>
+                <div class="level-perks">
+                  <span>✓ 3+ production-ready capstones</span>
+                  <span>✓ 1-on-1 code reviews &amp; PR feedback</span>
+                  <span>✓ Portfolio showcase &amp; resume prep</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ob-action-dual level-actions">
+            <button type="button" class="btn btn-outline" id="obLevelBackBtn">← Back to Courses</button>
+            <button type="button" class="btn btn-primary btn-lg pulse-btn" id="obLevelFinishBtn" disabled>
+              <span>Launch Student Dashboard 🚀</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STUDENT DASHBOARD VIEW -->
+  <div class="page-view dashboard-page-view" id="dashboardView" style="display: none;">
+    <!-- Dashboard Navbar -->
+    <header class="dash-navbar">
+      <div class="dash-nav-container">
+        <a href="#" class="logo dash-logo" id="dashLogoHome">
+          <span class="logo-icon">⚡</span>
+          <span class="logo-text">Skill<span class="accent">Hub</span></span>
+          <span class="dash-mode-badge">Student Portal</span>
+        </a>
+        <div class="dash-nav-actions">
+          <button type="button" class="btn btn-outline btn-sm" id="dashBrowseMoreCoursesBtn">
+            <span>📚 Browse Catalog</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm" id="dashBackHomeBtn">
+            <span>🏠 SkillHub Home</span>
+          </button>
+          <button type="button" class="btn btn-ghost btn-sm logout-btn" id="dashLogoutBtn">
+            <span>Log Out</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dash-main-container">
+      <!-- Welcome Banner -->
+      <section class="dash-hero-banner">
+        <div class="dash-hero-content">
+          <div class="dash-welcome-badge">🎓 Welcome to your Learning Space</div>
+          <h1>Welcome back, <span class="gradient-text" id="dashStudentName">Aarav Sharma</span>!</h1>
+          <p class="dash-hero-sub">Here is your customized student overview, active courses, and personalized curriculum based on your skill level.</p>
+        </div>
+        <div class="dash-hero-quick-card">
+          <div class="quick-card-stat">
+            <span class="quick-num" id="dashStatCoursesCount">0</span>
+            <span class="quick-label">Enrolled Courses</span>
+          </div>
+          <div class="quick-card-divider"></div>
+          <div class="quick-card-stat">
+            <span class="quick-num" id="dashStatHoursCount">0h</span>
+            <span class="quick-label">Curriculum Hours</span>
+          </div>
+          <div class="quick-card-divider"></div>
+          <div class="quick-card-stat">
+            <span class="quick-num dash-level-stat" id="dashStatLevelBadge">Basic</span>
+            <span class="quick-label">Skill Assessment</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grid: Student Info & Learning Roadmap -->
+      <div class="dash-layout-grid">
+        <!-- LEFT: Student Information Card -->
+        <div class="dash-card student-profile-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <span class="card-icon">👤</span>
+              <div>
+                <h2>Learner Profile</h2>
+                <p class="card-sub">Your registered credentials &amp; assessment</p>
+              </div>
+            </div>
+            <span class="student-status-badge">● Active Student</span>
+          </div>
+
+          <div class="profile-avatar-row">
+            <div class="profile-avatar-box">
+              <span class="profile-avatar-emoji" id="dashAvatarEmoji">🎓</span>
+            </div>
+            <div class="profile-title-col">
+              <h3 id="dashProfileName">Aarav Sharma</h3>
+              <span class="profile-student-id" id="dashProfileId">ID: #SH-2026-8842</span>
+            </div>
+          </div>
+
+          <div class="profile-details-list">
+            <!-- Email / Phone -->
+            <div class="detail-item">
+              <div class="detail-icon">📱</div>
+              <div class="detail-content">
+                <span class="detail-label">Email or Phone No.</span>
+                <strong class="detail-value" id="dashProfileContact">aarav.sharma@example.com</strong>
+              </div>
+            </div>
+
+            <!-- Age -->
+            <div class="detail-item">
+              <div class="detail-icon">🎂</div>
+              <div class="detail-content">
+                <span class="detail-label">Age</span>
+                <strong class="detail-value" id="dashProfileAge">21 Years</strong>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="detail-item">
+              <div class="detail-icon">📍</div>
+              <div class="detail-content">
+                <span class="detail-label">Address</span>
+                <strong class="detail-value" id="dashProfileAddress">42 Tech Innovation Park, Bengaluru, KA</strong>
+              </div>
+            </div>
+
+            <!-- Assessment Level ("How much do you known") -->
+            <div class="detail-item highlight-item">
+              <div class="detail-icon">🎯</div>
+              <div class="detail-content">
+                <span class="detail-label">How much do you known</span>
+                <div class="level-badge-pill" id="dashProfileLevel">Basic</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-card-footer">
+            <button type="button" class="btn btn-outline btn-sm w-full" id="dashEditProfileBtn">✏️ Edit Profile Information</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Tailored Roadmap / Project Showcase based on Level -->
+        <div class="dash-card roadmap-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <span class="card-icon">🗺️</span>
+              <div>
+                <h2>Your Tailored Roadmap</h2>
+                <p class="card-sub" id="dashRoadmapSub">Personalized milestones for your level</p>
+              </div>
+            </div>
+            <span class="roadmap-level-tag" id="dashRoadmapLevelTag">Custom Plan</span>
+          </div>
+
+          <div class="roadmap-milestones" id="dashRoadmapMilestones">
+            <!-- Injected by script based on chosen level -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: Enrolled Courses -->
+      <section class="dash-courses-section">
+        <div class="dash-section-header">
+          <div>
+            <span class="section-tag">📚 Current Enrollment</span>
+            <h2>My Enrolled <span class="gradient-text">Courses</span></h2>
+            <p class="section-subtitle">Jump right back into your selected courses or start a new chapter</p>
+          </div>
+          <button type="button" class="btn btn-primary" id="dashEnrollMoreBtn">
+            <span>+ Enroll in More Courses</span>
+          </button>
+        </div>
+
+        <div class="dash-enrolled-grid" id="dashEnrolledGrid">
+          <!-- Injected dynamically based on selected courses -->
+        </div>
+      </section>
+
+      <!-- SECTION: Mentorship & Project Hub -->
+      <section class="dash-mentor-hub">
+        <div class="mentor-hub-banner">
+          <div class="mentor-banner-content">
+            <span class="mentor-tag">🤝 1-on-1 Mentorship</span>
+            <h3>Need Guidance on Your Courses or Projects?</h3>
+            <p>Every enrolled student gets direct access to senior engineers and mentors from Google, Microsoft, and top tech companies.</p>
+            <div class="mentor-actions">
+              <button type="button" class="btn btn-primary" id="dashBookMentorBtn">Book Free 1-on-1 Session</button>
+              <button type="button" class="btn btn-outline" id="dashDiscordBtn">Join Student Discord (50K+)</button>
+            </div>
+          </div>
+          <div class="mentor-banner-avatars">
+            <div class="mentor-pill-card">
+              <span class="mentor-emoji">👨‍💻</span>
+              <div>
+                <strong>Priya Nair</strong>
+                <p>Sr. Staff Engineer · React &amp; Cloud</p>
+              </div>
+              <span class="status-dot"></span>
+            </div>
+            <div class="mentor-pill-card">
+              <span class="mentor-emoji">👩‍🔬</span>
+              <div>
+                <strong>David Kim</strong>
+                <p>Lead AI Researcher · Deep Learning</p>
+              </div>
+              <span class="status-dot"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- CURRICULUM VIEWER MODAL -->
+  <div class="modal-overlay curriculum-modal-overlay" id="curriculumModalOverlay" role="dialog" aria-modal="true" aria-labelledby="curriculumModalTitle">
+    <div class="modal curriculum-modal" id="curriculumModal">
+      <button class="modal-close" id="curriculumModalClose" aria-label="Close modal">✕</button>
+      <div class="curriculum-modal-header">
+        <div class="curriculum-icon" id="currModalEmoji">⚛️</div>
+        <div>
+          <span class="curriculum-category" id="currModalCategory">Development</span>
+          <h2 id="curriculumModalTitle">React.js Complete Bootcamp</h2>
+          <p class="modal-sub" id="currModalDesc">Master modern React with hooks, context, and production projects.</p>
+        </div>
+      </div>
+      <div class="curriculum-modal-body">
+        <div class="curriculum-progress-summary">
+          <span>Course Progress: <strong id="currModalProgressPercent">0%</strong></span>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" id="currModalProgressBar" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="curriculum-modules-list" id="currModulesList">
+          <!-- Modules injected here -->
+        </div>
+      </div>
+      <div class="curriculum-modal-footer">
+        <button type="button" class="btn btn-outline" id="currCloseFooterBtn">Close</button>
+        <button type="button" class="btn btn-primary" id="currSimulateNextBtn">Mark Next Lesson Complete ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL OVERLAY -->
+  <div class="modal-overlay login-modal-overlay" id="loginModalOverlay" role="dialog" aria-modal="true" aria-labelledby="loginModalHeading">
+    <div class="modal login-modal" id="loginModal">
+      <button class="modal-close" id="loginModalClose" aria-label="Close modal">✕</button>
+
+      <!-- VIEW 1: Role Selection Cards -->
+      <div class="login-view" id="loginRoleSelectView">
+        <div class="login-header text-center">
+          <div class="login-badge-pill">⚡ Welcome to SkillHub</div>
+          <h2 id="loginModalHeading">How would you like to <span class="gradient-text">Log In?</span></h2>
+          <p class="modal-sub">Choose your portal to continue learning or recruit top talent</p>
+        </div>
+
+        <div class="role-cards-grid">
+          <!-- Learner Card -->
+          <div class="role-card" id="cardChooseLearner" role="button" tabindex="0" title="Click to log in as Learner">
+            <div class="role-card-glow learner-glow"></div>
+            <div class="role-card-top">
+              <div class="role-icon-box learner-box">🎓</div>
+              <span class="role-tag learner-tag">For Learners</span>
+            </div>
+            <h3>Login as Learner</h3>
+            <p>Access enrolled courses, join live mentor sessions, solve projects &amp; track job applications.</p>
+            <ul class="role-perks">
+              <li><span class="check-icon">✓</span> 200+ free &amp; industry-grade courses</li>
+              <li><span class="check-icon">✓</span> 1-on-1 mentorship bookings</li>
+              <li><span class="check-icon">✓</span> 1-click apply to 1,500+ tech jobs</li>
+            </ul>
+            <button type="button" class="btn btn-primary w-full role-cta-btn" id="btnSelectLearner">
+              <span>Continue as Learner</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+          <!-- Hiring Card -->
+          <div class="role-card" id="cardChooseHiring" role="button" tabindex="0" title="Click to log in for Hiring">
+            <div class="role-card-glow hiring-glow"></div>
+            <div class="role-card-top">
+              <div class="role-icon-box hiring-box">💼</div>
+              <span class="role-tag hiring-tag">For Recruiters</span>
+            </div>
+            <h3>Login for Hiring</h3>
+            <p>Post tech jobs, browse pre-vetted graduate portfolios, schedule interviews &amp; hire quickly.</p>
+            <ul class="role-perks">
+              <li><span class="check-icon">✓</span> Post unlimited high-visibility jobs</li>
+              <li><span class="check-icon">✓</span> Direct access to 50K+ talent pool</li>
+              <li><span class="check-icon">✓</span> Candidate pipeline &amp; ATS tools</li>
+            </ul>
+            <button type="button" class="btn btn-outline w-full role-cta-btn hiring-outline-btn" id="btnSelectHiring">
+              <span>Continue for Hiring</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="modal-auth-footer">
+          <span>New to SkillHub?</span>
+          <a href="#skills" class="link-highlight" id="modalRegisterLink">Create a free learner account</a>
+        </div>
+      </div>
+
+      <!-- VIEW 2: Interactive Login Form with Switchable Tabs -->
+      <div class="login-view" id="loginFormView" style="display: none;">
+        <!-- Top Navigation inside Form View -->
+        <div class="form-view-top-bar">
+          <button type="button" class="back-to-roles-btn" id="backToRolesBtn">
+            <span>←</span> Switch Portal
+          </button>
+          <div class="role-toggle-tabs" role="tablist">
+            <button type="button" class="role-tab active" id="tabLearner" data-role="learner" role="tab" aria-selected="true">
+              <span>🎓</span> Learner Login
+            </button>
+            <button type="button" class="role-tab" id="tabHiring" data-role="hiring" role="tab" aria-selected="false">
+              <span>💼</span> Hiring Login
+            </button>
+          </div>
+        </div>
+
+        <!-- LEARNER FORM PANEL -->
+        <div class="role-form-panel active" id="learnerFormPanel">
+          <div class="login-header">
+            <div class="panel-role-chip learner-chip">🎓 Learner Portal</div>
+            <h2>Log In as <span class="gradient-text">Learner</span></h2>
+            <p class="modal-sub">Continue your learning journey &amp; explore job matches</p>
+          </div>
+
+          <div class="demo-fill-banner">
+            <span class="demo-icon">💡</span>
+            <span class="demo-text">Quick evaluation?</span>
+            <button type="button" class="demo-fill-btn" id="demoFillLearnerBtn">⚡ Autofill Demo Learner</button>
+          </div>
+
+          <form class="auth-form" id="learnerLoginForm">
+            <div class="form-group">
+              <label for="learnerEmail">Email Address or Username</label>
+              <div class="input-with-icon">
+                <span class="input-icon">✉️</span>
+                <input type="email" id="learnerEmail" placeholder="e.g. learner@skillhub.com" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="learnerPassword">Password</label>
+                <a href="javascript:void(0)" class="forgot-link" id="learnerForgotPass">Forgot password?</a>
+              </div>
+              <div class="input-with-icon">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="learnerPassword" placeholder="Enter your password" required autocomplete="current-password" />
+                <button type="button" class="pass-toggle-btn" aria-label="Toggle password visibility" data-target="learnerPassword">👁️</button>
+              </div>
+            </div>
+            <div class="form-check-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="learnerRemember" checked />
+                <span class="custom-checkbox"></span>
+                <span>Remember me on this device</span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-full submit-login-btn" id="submitLearnerLogin">
+              <span>Sign In as Learner</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>or continue with</span></div>
+          <div class="social-auth-row">
+            <button type="button" class="social-auth-btn social-google">
+              <span class="social-icon">G</span> Google
+            </button>
+            <button type="button" class="social-auth-btn social-github">
+              <span class="social-icon">🐙</span> GitHub
+            </button>
+            <button type="button" class="social-auth-btn social-linkedin">
+              <span class="social-icon">in</span> LinkedIn
+            </button>
+          </div>
+
+          <div class="modal-auth-footer">
+            <span>Don't have a learner account?</span>
+            <a href="#skills" class="link-highlight" id="footerLearnerSignup">Start learning for free</a>
+          </div>
+        </div>
+
+        <!-- HIRING FORM PANEL -->
+        <div class="role-form-panel" id="hiringFormPanel" style="display: none;">
+          <div class="login-header">
+            <div class="panel-role-chip hiring-chip">💼 Employer &amp; Recruiter Portal</div>
+            <h2>Log In for <span class="gradient-text">Hiring</span></h2>
+            <p class="modal-sub">Manage your company listings and connect with top candidates</p>
+          </div>
+
+          <div class="demo-fill-banner hiring-demo-banner">
+            <span class="demo-icon">💼</span>
+            <span class="demo-text">Quick evaluation?</span>
+            <button type="button" class="demo-fill-btn hiring-demo-btn" id="demoFillHiringBtn">⚡ Autofill Demo Recruiter</button>
+          </div>
+
+          <form class="auth-form" id="hiringLoginForm">
+            <div class="form-group">
+              <label for="hiringEmail">Work / Official Email</label>
+              <div class="input-with-icon">
+                <span class="input-icon">💼</span>
+                <input type="email" id="hiringEmail" placeholder="e.g. hr@techcorp.com" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="hiringCompany">Company Name</label>
+              <div class="input-with-icon">
+                <span class="input-icon">🏢</span>
+                <input type="text" id="hiringCompany" placeholder="e.g. TechCorp Inc." autocomplete="organization" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="label-row">
+                <label for="hiringPassword">Password</label>
+                <a href="javascript:void(0)" class="forgot-link" id="hiringForgotPass">Forgot password?</a>
+              </div>
+              <div class="input-with-icon">
+                <span class="input-icon">🔒</span>
+                <input type="password" id="hiringPassword" placeholder="Enter employer password" required autocomplete="current-password" />
+                <button type="button" class="pass-toggle-btn" aria-label="Toggle password visibility" data-target="hiringPassword">👁️</button>
+              </div>
+            </div>
+            <div class="form-check-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="hiringRemember" checked />
+                <span class="custom-checkbox"></span>
+                <span>Keep company signed in</span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-full submit-login-btn hiring-submit-btn" id="submitHiringLogin">
+              <span>Sign In to Hiring Portal</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>or sign in with</span></div>
+          <div class="social-auth-row">
+            <button type="button" class="social-auth-btn social-google">
+              <span class="social-icon">G</span> Google Workspace
+            </button>
+            <button type="button" class="social-auth-btn social-linkedin">
+              <span class="social-icon">in</span> LinkedIn Recruiter
+            </button>
+          </div>
+
+          <div class="modal-auth-footer">
+            <span>Need to post a job right away?</span>
+            <a href="javascript:void(0)" class="link-highlight" id="footerPostJobTrigger">Post a Job — Free</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="backToTop">↑</button>
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
